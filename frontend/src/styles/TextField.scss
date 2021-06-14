@@ -1,0 +1,33 @@
+@import "./variables";
+@import "./grid";
+
+.text-field {
+    margin-bottom: 1.5rem;
+    
+    input {
+        width: 100%;
+        padding: 0.75rem 1rem;
+        border: none;
+        outline: none;
+        border-radius: 0.25rem;
+        box-shadow: $shadow;
+        color: #111;
+        font-size: 1rem;
+
+        @include respond-to('medium') {
+            border-radius: 0.5rem;
+            font-size: 1.2rem;
+        }
+        @include respond-to('large') {
+            border-radius: 0.75rem;
+            font-size: 1.5rem;
+        }
+    }
+
+    .error {
+        display: inline-block;
+        margin-top: 0.5rem;
+        color: red;
+        padding: 0 1rem;
+    }
+}
