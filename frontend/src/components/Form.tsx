@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { useForm } from "react-hook-form";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
 import { v4 } from "uuid";
 import { postLoadState } from "../state/postLoadState";
 import { todoState } from "../state/todoState";
@@ -14,7 +14,7 @@ type Inputs = {
 
 const Form = () => {
   const [todos, setTodos] = useRecoilState(todoState);
-  const [isPostLoading, setIsPostLoading] = useRecoilState(postLoadState);
+  const setIsPostLoading = useSetRecoilState(postLoadState);
   const {
     register,
     handleSubmit,

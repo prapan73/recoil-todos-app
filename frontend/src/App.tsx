@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React from "react";
+import React, { Suspense } from "react";
 import { RecoilRoot } from "recoil";
 import Wrapper from "./components/Wrapper";
 
@@ -11,9 +11,11 @@ const App: React.FC = () => {
       <div className="container">
         <div className="row">
           <div className="col">
-            <RecoilRoot>
-              <Wrapper />
-            </RecoilRoot>
+            <Suspense fallback={<div>loading</div>}>
+              <RecoilRoot>
+                <Wrapper />
+              </RecoilRoot>
+            </Suspense>
           </div>
         </div>
       </div>

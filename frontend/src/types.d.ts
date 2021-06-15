@@ -1,3 +1,5 @@
+import { type } from "os";
+
 export type Status = "init" | "loading" | "loaded" | "error";
 export interface Data {
   id: string;
