@@ -12,11 +12,22 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    animation: slideInRight .4s ease-in;
 
     @include respond-to('medium') {
         border-radius: 0.5rem;
     }
     @include respond-to('large') {
         border-radius: 0.75rem;
+    }
+}
+
+@keyframes slideInRight {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
     }
 }

@@ -1,0 +1,36 @@
+.progress {
+    background-color: #E07C7C;
+    padding: 0.5rem 1.5rem;
+    border-radius: 0.5rem;
+    color: #fff;
+    margin-bottom: 1rem;
+    animation: fadeIn .3s ease;
+
+    h2 {
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .bar {
+        background-color: #3B3B3B;
+        margin-bottom: 0.5rem;
+        border-radius: 10px;
+        overflow: hidden;
+        
+        .value {
+            transition: all .1s ease-in;
+            height: 8px;
+            background-color: #fff;
+        }
+    }
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}

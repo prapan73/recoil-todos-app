@@ -1,0 +1,49 @@
+@import "./variables";
+@import "./grid";
+
+.edit-field {
+  position: relative;
+  width: 100%;
+  display: flex;
+  overflow: hidden;
+
+  input {
+    width: 100%;
+    padding: 0;
+    border: none;
+    outline: none;
+    border-radius: 0.25rem;
+    color: #111;
+    font-size: 1rem;
+
+    @include respond-to("medium") {
+      font-size: 1.2rem;
+    }
+    @include respond-to("large") {
+      font-size: 1.5rem;
+    }
+  }
+
+  button {
+    padding: 0.5rem 0.75rem;
+    border: none;
+    background-color: $checkbox-color;
+    color: #fff;
+    border-radius: 1rem;
+    box-shadow: $shadow;
+    animation: fadeInRight 0.4s ease-in;
+    cursor: pointer;
+  }
+}
+
+@keyframes fadeInRight {
+  0% {
+    opacity: 0;
+    transform: translateX(200%);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}

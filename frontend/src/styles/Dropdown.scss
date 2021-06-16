@@ -1,0 +1,44 @@
+@import "./variables";
+
+.dropdown {
+    position: relative;
+
+    button {
+        border: none;
+        background: none;
+        cursor: pointer;
+        font-size: 1rem;
+    }
+
+    &-list {
+        position: absolute;
+        top: 100%;
+        background-color: #fff;
+        width: 100px;
+        right: 0;
+        border-radius: 1rem;
+        box-shadow: $shadow;
+        padding: 1rem;
+        z-index: 1;
+        animation:  fadeIn .4s;
+
+        &-edit {
+            display: block;
+            margin-bottom: 1rem;
+        }
+
+        &-del {
+            display: block;
+            color: #E07C7C;
+        }
+    }
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}

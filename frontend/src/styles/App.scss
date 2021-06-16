@@ -50,6 +50,7 @@ h1 {
     border-radius: 0.5rem;
     padding: 2rem 1.5rem;
     box-shadow: $shadow;
+    overflow: hidden;
 
     @include respond-to('medium') {
         border-radius: 1rem;
