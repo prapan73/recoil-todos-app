@@ -8,9 +8,13 @@ import Progress from "./Progress";
 import useFetch from "../hooks/useFetch";
 import { todoState, markAsDone } from "../state/todoState";
 import { postLoadState } from "../state/postLoadState";
-import axios from "axios";
 import { progressPercentage } from "../state/progressState";
 import { editState } from "../state/editState";
+import { Patch } from "../hooks/useHttp";
+
+type Param = {
+  completed: boolean;
+};
 
 const Wrapper = () => {
   const response = useFetch();
@@ -27,28 +31,27 @@ const Wrapper = () => {
       visible: true,
       value: 0,
     });
-    axios
-      .patch(
-        `http://localhost:3001/todos/${id}`,
-        { completed: isChecked },
-        {
-          onUploadProgress: (progressEvent) => {
-            let percentCompleted = Math.floor(
-              (progressEvent.loaded * 100) / progressEvent.total
-            );
-            setProgress({
-              value: percentCompleted,
-              visible: true,
-            });
-          },
-        }
-      )
-      .then(() =>
-        setProgress({
-          visible: false,
-          value: 0,
-        })
-      );
+
+    Patch<Param>(
+      id,
+      { completed: isChecked },
+      {
+        onUploadProgress: (progressEvent) => {
+          let percentCompleted = Math.floor(
+            (progressEvent.loaded * 100) / progressEvent.total
+          );
+          setProgress({
+            value: percentCompleted,
+            visible: true,
+          });
+        },
+      }
+    ).then(() =>
+      setProgress({
+        visible: false,
+        value: 0,
+      })
+    );
   };
 
   React.useEffect(() => {

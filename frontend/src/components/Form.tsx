@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import axios from "axios";
 import { useForm } from "react-hook-form";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import { v4 } from "uuid";
+import { Post } from "../hooks/useHttp";
 import { postLoadState } from "../state/postLoadState";
 import { progressPercentage } from "../state/progressState";
 import { todoState } from "../state/todoState";
@@ -39,24 +39,23 @@ const Form: React.FC = () => {
       visible: true,
       value: 0,
     });
-    axios
-      .post(`http://localhost:3001/todos`, params, {
-        onUploadProgress: (progressEvent) => {
-          let percentCompleted = Math.floor(
-            (progressEvent.loaded * 100) / progressEvent.total
-          );
-          setProgress({
-            value: percentCompleted,
-            visible: true,
-          });
-        },
-      })
-      .then(() =>
+
+    Post<Data>(params, {
+      onUploadProgress: (progressEvent) => {
+        let percentCompleted = Math.floor(
+          (progressEvent.loaded * 100) / progressEvent.total
+        );
         setProgress({
-          visible: false,
-          value: 0,
-        })
-      );
+          value: percentCompleted,
+          visible: true,
+        });
+      },
+    }).then(() =>
+      setProgress({
+        visible: false,
+        value: 0,
+      })
+    );
 
     e.target.reset();
   };

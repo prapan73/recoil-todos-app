@@ -1,9 +1,9 @@
-import axios from "axios";
 import React from "react";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import { editState } from "../state/editState";
 import { progressPercentage } from "../state/progressState";
 import { todoState } from "../state/todoState";
+import { Patch } from "../hooks/useHttp";
 
 import "../styles/EditField.scss";
 import { Data } from "../types";
@@ -12,6 +12,10 @@ interface Props {
   id: string;
   value: string;
 }
+
+type Param = {
+  title: string;
+};
 
 const EditField: React.FC<Props> = ({ id, value }) => {
   const [state, setState] = React.useState(value);
@@ -30,30 +34,26 @@ const EditField: React.FC<Props> = ({ id, value }) => {
   };
 
   const handleEdit = (): void => {
-    axios
-      .patch(
-        `http://localhost:3001/todos/${id}`,
-        { title: state },
-        {
-          onUploadProgress: (progressEvent) => {
-            let percentCompleted = Math.floor(
-              (progressEvent.loaded * 100) / progressEvent.total
-            );
-            setProgress({
-              value: percentCompleted,
-              visible: true,
-            });
-          },
-        }
-      )
-      .then(() => {
-        setProgress({
-          visible: false,
-          value: 0,
-        });
+    const param: Param = { title: state };
 
-        setEditMode({ ...editMode, [id]: false });
+    Patch<Param>(id, param, {
+      onUploadProgress: (progressEvent) => {
+        let percentCompleted = Math.floor(
+          (progressEvent.loaded * 100) / progressEvent.total
+        );
+        setProgress({
+          value: percentCompleted,
+          visible: true,
+        });
+      },
+    }).then(() => {
+      setProgress({
+        visible: false,
+        value: 0,
       });
+
+      setEditMode({ ...editMode, [id]: false });
+    });
   };
 
   return (
