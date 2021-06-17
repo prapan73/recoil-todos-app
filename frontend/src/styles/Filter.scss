@@ -1,0 +1,45 @@
+@import "./variables";
+@import "./grid";
+
+.filter {
+  width: 150px;
+  position: relative;
+
+  .toggle-button {
+    background-color: #fff;
+    border-radius: 1rem;
+    box-shadow: $shadow;
+    padding: 0.5rem 1rem;
+    border: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    font-size: 1rem;
+    @include respond-to("medium") {
+      font-size: 1.2rem;
+    }
+
+    @include respond-to("large") {
+      font-size: 1.5rem;
+    }
+  }
+
+  .toggle-dropdown {
+    width: 100%;
+    position: absolute;
+    top: 110%;
+    background-color: #fff;
+    border-radius: 1rem;
+    box-shadow: $shadow;
+    padding: 0.5rem 1rem;
+    z-index: 2;
+
+    button {
+      background: none;
+      border: none;
+      display: block;
+      padding: 0.25rem 0;
+    }
+  }
+}

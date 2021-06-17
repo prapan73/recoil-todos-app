@@ -1,12 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React from "react";
-import { useRecoilState, useSetRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import Filter from "./Filter";
 import Item from "./Item";
 import Form from "./Form";
 import Loading from "./Loading";
 import Progress from "./Progress";
 import useFetch from "../hooks/useFetch";
-import { todoState, markAsDone } from "../state/todoState";
+import { todoState, markAsDone, filterState } from "../state/todoState";
 import { postLoadState } from "../state/postLoadState";
 import { progressPercentage } from "../state/progressState";
 import { editState } from "../state/editState";
@@ -19,7 +20,8 @@ type Param = {
 const Wrapper = () => {
   const response = useFetch();
   const { status, data } = response;
-  const [todos, setTodos] = useRecoilState(todoState);
+  const todos = useRecoilValue(filterState);
+  const setTodos = useSetRecoilState(todoState);
   const [isPostLoading] = useRecoilState(postLoadState);
   const [progress, setProgress] = useRecoilState(progressPercentage);
   const setMarkAsDone = useSetRecoilState(markAsDone);
@@ -68,7 +70,10 @@ const Wrapper = () => {
 
   return (
     <div className="wrapper">
-      <h1>Tasks</h1>
+      <div className="wrapper-top">
+        <h1>Tasks</h1>
+        <Filter />
+      </div>
       {progress.visible && <Progress percenTage={progress.value} />}
       {status === "loading" && <Loading items={3} />}
       {status === "loaded" &&

@@ -1,9 +1,30 @@
 import { atom, selector } from "recoil";
-import { Data } from "../types";
+import { Data, FilterKey } from "../types";
 
 export const todoState = atom({
   key: "todos",
   default: [] as Data[],
+});
+
+export const filterType = atom<FilterKey>({
+  key: "filterState",
+  default: "all",
+});
+
+export const filterState = selector({
+  key: "filter",
+  get: ({ get }) => {
+    const todoList = get(todoState);
+    const filter = get(filterType);
+    switch (filter) {
+      case "done":
+        return todoList.filter((item) => item.completed);
+      case "undone":
+        return todoList.filter((item) => !item.completed);
+      default:
+        return todoList;
+    }
+  },
 });
 
 export const markAsDone = selector({
