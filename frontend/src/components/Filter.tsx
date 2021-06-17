@@ -26,13 +26,22 @@ const Filter = () => {
       </button>
       {isOpen && (
         <div className="toggle-dropdown">
-          <button onClick={() => handleFilter("all")}>
+          <button
+            onClick={() => handleFilter("all")}
+            className={filter === "all" ? "active" : ""}
+          >
             {MappingFilter["all"].label}
           </button>
-          <button onClick={() => handleFilter("done")}>
+          <button
+            onClick={() => handleFilter("done")}
+            className={filter === "done" ? "active" : ""}
+          >
             {MappingFilter["done"].label}
           </button>
-          <button onClick={() => handleFilter("undone")}>
+          <button
+            onClick={() => handleFilter("undone")}
+            className={filter === "undone" ? "active" : ""}
+          >
             {MappingFilter["undone"].label}
           </button>
         </div>
